@@ -9,6 +9,10 @@
 #pragma comment(lib, "user32.lib")
 #pragma comment(lib, "shell32.lib")
 #pragma comment(lib, "advapi32.lib")
+#pragma comment(lib, "kernel32.lib")
+#pragma comment(lib, "ucrt.lib")
+#pragma comment(lib, "libucrt.lib")
+#pragma comment(lib, "libcmt.lib")
 
 float g_Saturation = 1.5f;
 float g_Brightness = 1.0f;
@@ -66,14 +70,14 @@ void AddTrayIcon() {
     g_nid.uFlags = NIF_ICON | NIF_MESSAGE | NIF_TIP;
     g_nid.uCallbackMessage = WM_USER + 1;
     g_nid.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-    wcscpy_s(g_nid.szTip, 128, L"Saturation Tool");
+    lstrcpyW(g_nid.szTip, L"Saturation Tool");
     Shell_NotifyIconW(NIM_ADD, &g_nid);
 }
 
 void ShowBalloon(const wchar_t* title, const wchar_t* text) {
     g_nid.uFlags = NIF_INFO;
-    wcsncpy_s(g_nid.szInfoTitle, 64, title, _TRUNCATE);
-    wcsncpy_s(g_nid.szInfo, 256, text, _TRUNCATE);
+    lstrcpynW(g_nid.szInfoTitle, title, 64);
+    lstrcpynW(g_nid.szInfo, text, 256);
     g_nid.dwInfoFlags = NIIF_INFO;
     Shell_NotifyIconW(NIM_MODIFY, &g_nid);
 }
