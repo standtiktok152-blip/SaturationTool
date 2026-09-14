@@ -1,0 +1,18 @@
+name: Build Windows EXE
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+    - name: Compile
+      run: |
+        cl.exe /MT /O2 /EHsc /D UNICODE /D _UNICODE SaturationTool.cpp /link /SUBSYSTEM:WINDOWS /ENTRY:WinMain user32.lib gdi32.lib shell32.lib advapi32.lib /OUT:SaturationTool.exe
+      shell: cmd
+    - name: Upload EXE
+      uses: actions/upload-artifact@v4
+      with:
+        name: SaturationTool
+        path: SaturationTool.exe
