@@ -14,7 +14,7 @@ jobs:
 
     - name: Compile
       run: |
-        cl.exe /MT /O2 /EHsc /D UNICODE /D _UNICODE SaturationTool.cpp /link /SUBSYSTEM:WINDOWS /ENTRY:WinMain user32.lib gdi32.lib shell32.lib advapi32.lib /OUT:SaturationTool.exe
+        cl.exe /MT /O2 /EHsc /D UNICODE /D _UNICODE SaturationTool.cpp /link /SUBSYSTEM:WINDOWS /ENTRY:WinMain user32.lib gdi32.lib shell32.lib advapi32.lib kernel32.lib /OUT:SaturationTool.exe
       shell: cmd
 
     - name: Upload EXE
