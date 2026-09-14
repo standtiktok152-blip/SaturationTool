@@ -66,14 +66,14 @@ void AddTrayIcon() {
     g_nid.uFlags = NIF_ICON | NIF_MESSAGE | NIF_TIP;
     g_nid.uCallbackMessage = WM_USER + 1;
     g_nid.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-    lstrcpyW(g_nid.szTip, L"Saturation Tool");
+    wcscpy_s(g_nid.szTip, 128, L"Saturation Tool");
     Shell_NotifyIconW(NIM_ADD, &g_nid);
 }
 
 void ShowBalloon(const wchar_t* title, const wchar_t* text) {
     g_nid.uFlags = NIF_INFO;
-    lstrcpynW(g_nid.szInfoTitle, title, 64);
-    lstrcpynW(g_nid.szInfo, text, 256);
+    wcsncpy_s(g_nid.szInfoTitle, 64, title, _TRUNCATE);
+    wcsncpy_s(g_nid.szInfo, 256, text, _TRUNCATE);
     g_nid.dwInfoFlags = NIIF_INFO;
     Shell_NotifyIconW(NIM_MODIFY, &g_nid);
 }
